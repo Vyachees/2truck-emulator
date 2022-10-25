@@ -22,6 +22,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ReadCSV {
     int num=0;
+    Sender sender =new Sender();
     @EventListener(ApplicationReadyEvent.class)
     public void ReadCSV() throws IOException, InterruptedException {
 
@@ -30,14 +31,18 @@ public class ReadCSV {
 
         while(true) {
             for (CSVRecord record : records) {
-
+                log.info("\n");
                 num++;
                 String dateTime = record.get("dateTime");
                 String id_truck = record.get("id_truck");
                 String lat = record.get("lat");
                 String lon = record.get("lon");
-                 Thread.sleep(1000);
-                log.info(num + " " + dateTime + " " + id_truck + " " + lat + " " + lon);
+                Thread.sleep(1000);
+                String message=num + " " + dateTime + " " + id_truck + " " + lat + " " + lon;
+                log.info("Read from file "+message);
+
+                sender.sendTE(message);
+
                 //System.out.println(num + " " + dateTime + " " + id_truck + " " + lat + " " + lon);
                 //log.info(dateTime);
                 //String firstName = record.get("First Name");
