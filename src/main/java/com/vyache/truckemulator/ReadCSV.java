@@ -36,7 +36,7 @@ public class ReadCSV {
                 String id_truck = record.get("id_truck");
                 String lat = record.get("lat");
                 String lon = record.get("lon");
-                 Thread.sleep(10);
+                 Thread.sleep(1000);
                 log.info(num + " " + dateTime + " " + id_truck + " " + lat + " " + lon);
                 //System.out.println(num + " " + dateTime + " " + id_truck + " " + lat + " " + lon);
                 //log.info(dateTime);
