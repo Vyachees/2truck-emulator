@@ -11,22 +11,18 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
-import org.springframework.stereotype.Component;
-/**
- * @author Vyacheslav Kirillov
- * @create 2022.10.25 16:57
- **/
+
+
 @Slf4j
 @Component
 public class ReadCSV {
     int num=0;
+    int tripNumber=1;
     Sender sender =new Sender();
     @EventListener(ApplicationReadyEvent.class)
     public void ReadCSV() throws IOException, InterruptedException {
 
-        Reader in = new FileReader("C:\\Users\\games\\Desktop\\MyProjects\\truck-emulator\\src\\main\\resources\\static\\SimpleData.csv");
+        Reader in = new FileReader("C:\\Users\\games\\Desktop\\MyProjectsFromGitHub\\2truck-emulator\\src\\main\\resources\\static\\SimpleData.csv");
         Iterable<CSVRecord> records = CSVFormat.EXCEL.withHeader().parse(in);
 
         while(true) {
@@ -38,16 +34,17 @@ public class ReadCSV {
                 String lat = record.get("lat");
                 String lon = record.get("lon");
                 Thread.sleep(1000);
-                String message=num + " " + dateTime + " " + id_truck + " " + lat + " " + lon;
+                String message=num + " " + dateTime + " " + id_truck + " " + lat + " " + lon + " "+ tripNumber;
                 log.info("Read from file "+message);
 
-                sender.sendTE(message);
+                Sender.sendTE(message);
 
                 //System.out.println(num + " " + dateTime + " " + id_truck + " " + lat + " " + lon);
                 //log.info(dateTime);
                 //String firstName = record.get("First Name");
 
             }
+            tripNumber++;
             ReadCSV();
         }
     }

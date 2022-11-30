@@ -3,20 +3,18 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.net.*;
 import java.io.*;
-/**
- * @author Vyacheslav Kirillov
- * @create 2022.10.25 20:42
- **/
+
 @Slf4j
 public class Sender {
     private  static final int    serverPort = 50001;
     private  static final String localhost  = "127.0.0.1";
 
-    static Socket socket = null;
+    static Socket socket;
     static InetAddress ipAddress;
-
+//TODO реализовать восстановление коннекта если хаб какое-то время недоступен
     static {
         try {
+
             ipAddress = InetAddress.getByName(localhost);
             socket = new Socket(ipAddress, serverPort);
             log.info("Welcome to Client side" +
@@ -25,18 +23,17 @@ public class Sender {
                     ", port " + serverPort + ")");
             log.info(
                     "The connection is established.");
-        } catch (UnknownHostException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
+}
 
-    ;
+
     public static void sendTE(String ar){
        // Socket socket = null;
         try{
             try {
+
 
                /* InetAddress ipAddress;
                 ipAddress = InetAddress.getByName(localhost);
@@ -111,6 +108,7 @@ public class Sender {
             try {
                 if (socket == null)
                     socket.close();
+                 //  log.info("bb");// socket = new Socket(ipAddress, serverPort);
             } catch (IOException e) {
                 e.printStackTrace();
             }
