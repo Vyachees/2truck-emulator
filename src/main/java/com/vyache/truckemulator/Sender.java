@@ -8,7 +8,6 @@ import java.io.*;
 public class Sender {
     private  static final int    serverPort = 50001;
     private  static final String localhost  = "127.0.0.1";
-
     static Socket socket;
     static InetAddress ipAddress;
 
@@ -26,11 +25,6 @@ public class Sender {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-       /*   InputStream  sin  = socket.getInputStream();
-          OutputStream sout = socket.getOutputStream();
-        DataInputStream  in = new DataInputStream (sin );
-        DataOutputStream out= new DataOutputStream(sout);*/
-//return  out;
 
     }
 
@@ -46,7 +40,6 @@ public class Sender {
                                         .getHostAddress() +
                                 " ReceiveBufferSize (SO_RCVBUF) = "
                                 + socket.getReceiveBufferSize());
-
                 // Create in and out streams
                 InputStream  sin  = socket.getInputStream();
                 OutputStream sout = socket.getOutputStream();
