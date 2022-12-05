@@ -33,7 +33,6 @@ public class ReadCSV {
                 Thread.sleep(1000);
                 String message = num + " " + dateTime + " " + id_truck + " " + lat + " " + lon + " " + tripNumber;
                 log.info("Read from file " + message);
-                log.info("Socket now = " + Sender.socket);
                 Sender.connectToHub();
                 Sender.sendToHub(message);
             }
